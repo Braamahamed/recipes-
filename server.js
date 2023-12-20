@@ -1,9 +1,9 @@
 const express = require('express');
 const axios = require('axios');
-const path = require('path')
+const path = require('path');
 
 const app = express();
-const recipesAPI = require('./server/routes/api')
+const recipesAPI = require('./server_router/api')
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
 

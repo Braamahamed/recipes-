@@ -5,14 +5,8 @@ function search(){
     const glutenFree = $('#glutenFreeCheckbox').is(':checked');
     const dairyFree = $('#dairyFreeCheckbox').is(':checked');
 
-    if (!ingredient.trim() ||!ingredient.match(/^[a-z]+$/i)) {
-      $("#recipeList").empty()
-      $('#recipeList').html('<p>Please enter a valid ingredient</p>');
-      return;
-    }
-
   let url = `/recipes/${ingredient}?glutenFree=${glutenFree}&dairyFree=${dairyFree}`;
-  
+     
     $.get(url).then((response) => {
       if (response.recipes.length === 0) {
         $("#recipeList").empty()
@@ -20,7 +14,9 @@ function search(){
       } else {
         renderer.displayRecipes(response);
       }
-    });
+    }).catch((error)=>{
+    alert(error.responseJSON.Error)
+   })
   }
 
 

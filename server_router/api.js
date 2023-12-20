@@ -1,18 +1,23 @@
 const express = require('express')
 const axios = require('axios')
-// const errors =require('./errors')
+const errors =require('./errors')
 const filterRecipes = require('./recipes')
 const recipesControl = new filterRecipes.recipesControl()
 const router = express.Router()
 const RECIPES_URL = 'https://recipes-goodness-elevation.herokuapp.com/recipes/ingredient/'
 
-const dairyIngredients = ["cream", "cheese", "milk", "butter", "creme", "ricotta", "mozzarella", "custard", "cream cheese","condensed milk","heavy cream"];
-const glutenIngredients = ["flour", "bread", "spaghetti", "biscuits", "beer"];
-
 router.get('/recipes/:ingredient', async (req, res) => {
     const ingredient = req.params.ingredient
     const apiUrl =  RECIPES_URL+ingredient;
-  
+    try {
+        recipesControl.checkvaledIngrediant(ingredient)
+    } catch (error) {
+        if(error instanceof errors.InvalidIngredientError){
+            res.status(409).send({"Error": `${ingredient} is not a valid ingrediant`})
+            return
+        }
+    }
+
     axios.get(apiUrl)
     .then(function (response) {
       const responseData = response.data;
@@ -30,12 +35,10 @@ router.get('/recipes/:ingredient', async (req, res) => {
   
         return true;
       })
-      console.log(filteredRecipes)
       res.status(200).json({recipes: filteredRecipes})
   
     })
     .catch(function (error) {
-      console.log(error)
       res.status(500).end()
     })
     

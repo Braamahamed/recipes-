@@ -2,6 +2,11 @@ const errors =require('./errors')
 const dairyIngredients = ["cream","cheese","milk","butter","creme","ricotta","mozzarella","custard","cream cheese"]
 const glutenIngredients = ["flour","bread","spaghetti","biscuits","beer"]
 class recipesControl {
+    checkvaledIngrediant(ingrediant){
+        if (!ingrediant.match(/^[a-z]+$/i) ) {
+            throw new errors.InvalidIngredientError()
+        }
+    }
   
    recipeContainsGluten(recipe) {
     const ingredients = recipe.ingredients.map(ingredient => ingredient.toLowerCase());
