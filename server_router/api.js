@@ -1,8 +1,8 @@
 const express = require('express')
 const axios = require('axios')
 // const errors =require('./errors')
-// const filterRecipes = require('./recipes')
-// const recipesController = new filterRecipes.recipesController()
+const filterRecipes = require('./recipes')
+const recipesControl = new filterRecipes.recipesControl()
 const router = express.Router()
 const RECIPES_URL = 'https://recipes-goodness-elevation.herokuapp.com/recipes/ingredient/'
 
@@ -16,15 +16,15 @@ router.get('/recipes/:ingredient', async (req, res) => {
     axios.get(apiUrl)
     .then(function (response) {
       const responseData = response.data;
-      const recipes = filtered(responseData.results)
+      const recipes = recipesControl.filtered(responseData.results)
       const glutenFree = req.query.glutenFree === 'true';
       const dairyFree = req.query.dairyFree === 'true';
       const filteredRecipes = recipes.filter(recipe => {
-        if (glutenFree && recipeContainsGluten(recipe)) {
+        if (glutenFree && recipesControl.recipeContainsGluten(recipe)) {
           return false;
         }
   
-        if (dairyFree && recipeContainsDairy(recipe)) {
+        if (dairyFree && recipesControl.recipeContainsDairy(recipe)) {
           return false;
         }
   
@@ -40,20 +40,5 @@ router.get('/recipes/:ingredient', async (req, res) => {
     })
     
   })
-
-  function recipeContainsGluten(recipe) {
-    const ingredients = recipe.ingredients.map(ingredient => ingredient.toLowerCase());
-    return ingredients.some(ingredient => glutenIngredients.includes(ingredient));
-  }
-  
-  function recipeContainsDairy(recipe) {
-    const ingredients = recipe.ingredients.map(ingredient => ingredient.toLowerCase());
-    return ingredients.some(ingredient => dairyIngredients.includes(ingredient));
-  }
-  
-  const filtered = function(arr){
-    const filteredArr = arr.map((recipe) =>{return {title : recipe.title , thumbnail : recipe.thumbnail, href : recipe.href, ingredients: recipe.ingredients}})
-    return filteredArr
-  }
 
 module.exports = router
