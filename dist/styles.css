@@ -1,0 +1,151 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  text-align: center;
+  margin-bottom: 20px; 
+}
+
+.mylogo {
+  max-width: 50%;
+  height: 120px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.search-section {
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  font-size: 16px;
+  width: 200px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: none;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px; 
+  margin-top: 15px; 
+  margin-bottom: 15px;
+}
+
+
+#recipeList {
+  display: grid;
+  grid-gap: 1vmax;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.recipe {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-right: 20px;
+}
+
+.recipe-img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+ul {
+  padding-left: 20px;
+  display: grid; 
+  grid-template-columns: repeat(3,1fr) ;
+  background-color: #f0f0f0;
+}
+
+li {
+  margin-bottom: 5px;
+  list-style:disc; 
+  padding-right: 8px;
+  padding-bottom: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+
+
+/* Media queries for responsive layout */
+@media screen and (max-width: 1024px) {
+  #recipeList {
+    justify-content: center;
+  }
+
+  .recipe {
+    width: calc(50% - 20px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .recipe {
+    width: calc(100% - 20px);
+  }
+  .container {
+    width: 90%; 
+  }
+
+  .header-content {
+    margin-bottom: 10px; 
+  }
+
+  .mylogo {
+    height: auto; 
+    max-height: 100px; 
+  }
+
+  h1 {
+    font-size: 24px; 
+  }
+
+  input[type="text"] {
+    width: 100%; 
+  }
+
+  button {
+    font-size: 14px; 
+  }
+
+  #recipeList {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .recipe {
+    width: calc(100% - 20px);
+    margin-right: 0;
+  }
+}

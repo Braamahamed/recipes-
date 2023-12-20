@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<head>
+  <title>Recipe Finder</title>
+  <link rel="icon" type="image/x-icon" href="img.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+      <div class="header-content">
+        <img src="img.png" alt="img" class="mylogo">
+        <h1>Recipe Search</h1>
+      </div>
+        <input type="text" id="ingredientInput" placeholder="Enter an ingredient" autofocus>
+        <button onclick=search()>Search</button><br>
+        <input type="checkbox" id="dairyFreeCheckbox">
+        <label for="dairyFreeCheckbox">Dairy Free</label>
+        <input type="checkbox" id="glutenFreeCheckbox">
+        <label for="glutenFreeCheckbox">Gluten Free</label>
+        <div id="recipeList"></div> 
+    
+        <script id="recipe-template" type="text/x-handlebars-template">
+          {{#each recipes}}
+            <div class="recipe">
+              <a href="{{href}}" target="_blank" data-id="{{idMeal}}">{{title}}</a><br>
+              <img src="{{thumbnail}}" alt="{{title}}" class="recipe-img"><br>
+              <p>Ingredients:</p>
+              <ul>
+                {{#each ingredients}}
+                  <li>{{this}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/each}}
+        </script>
+      </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script src="./jquery/dist/jquery.js"></script>
+<script src="render.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
