@@ -1,4 +1,5 @@
 const errors =require('./errors')
+const {faker} = require('@faker-js/faker');
 const dairyIngredients = ["cream","cheese","milk","butter","creme","ricotta","mozzarella","custard","cream cheese"]
 const glutenIngredients = ["flour","bread","spaghetti","biscuits","beer"]
 class recipesControl {
@@ -22,5 +23,20 @@ class recipesControl {
     const filteredArr = arr.map((recipe) =>{return {title : recipe.title , thumbnail : recipe.thumbnail, href : recipe.href, ingredients: recipe.ingredients}})
     return filteredArr
   }
+
+  addChefNames(recipe){
+    return recipe.map(r =>{
+    const ChefName = faker.person.firstName()
+    const CheflastName =faker.person.lastName()
+    r.chef = `${ChefName} ${CheflastName}`
+    return r
+  })
+  }
+   addRecipeRating(recipe){
+    return recipe.map(r => {
+      r.rating = 1 + Math.floor(Math.random() * 4);
+      return r
+    })
+   }
 }
 module.exports = {recipesControl}

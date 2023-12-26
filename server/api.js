@@ -20,8 +20,10 @@ router.get('/recipes/:ingredient', async (req, res) => {
 
     axios.get(apiUrl)
     .then(function (response) {
-      const responseData = response.data;
-      const recipes = recipesControl.filtered(responseData.results)
+      const responseData = response.data;      
+      let recipes = recipesControl.filtered(responseData.results)
+      recipes = recipesControl.addChefNames(recipes)
+      recipes = recipesControl.addRecipeRating(recipes)
       const glutenFree = req.query.glutenFree === 'true';
       const dairyFree = req.query.dairyFree === 'true';
       const filteredRecipes = recipes.filter(recipe => {
@@ -32,11 +34,10 @@ router.get('/recipes/:ingredient', async (req, res) => {
         if (dairyFree && recipesControl.recipeContainsDairy(recipe)) {
           return false;
         }
-  
         return true;
-      })
-      res.status(200).json({recipes: filteredRecipes})
-  
+      }) 
+      console.log(filterRecipes)
+      res.status(200).json({recipes: filteredRecipes})  
     })
     .catch(function (error) {
       res.status(500).end()
