@@ -1,10 +1,10 @@
 const express = require('express')
 const axios = require('axios')
 const errors =require('./errors')
+const {dairyIngredients , glutenIngredients, RECIPES_URL} = require ('../config')
 const filterRecipes = require('./recipes')
 const recipesControl = new filterRecipes.recipesControl()
 const router = express.Router()
-const RECIPES_URL = 'https://recipes-goodness-elevation.herokuapp.com/recipes/ingredient/'
 
 router.get('/recipes/:ingredient', async (req, res) => {
     const ingredient = req.params.ingredient
@@ -27,11 +27,11 @@ router.get('/recipes/:ingredient', async (req, res) => {
       const glutenFree = req.query.glutenFree === 'true';
       const dairyFree = req.query.dairyFree === 'true';
       const filteredRecipes = recipes.filter(recipe => {
-        if (glutenFree && recipesControl.recipeContainsGluten(recipe)) {
+        if (glutenFree && recipesControl.recipeContains(recipe, dairyIngredients)) {
           return false;
         }
   
-        if (dairyFree && recipesControl.recipeContainsDairy(recipe)) {
+        if (dairyFree && recipesControl.recipeContains(recipe, glutenIngredients)) {
           return false;
         }
         return true;

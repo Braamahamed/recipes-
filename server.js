@@ -1,5 +1,4 @@
 const express = require('express');
-const axios = require('axios');
 const path = require('path');
 
 const app = express();
@@ -12,8 +11,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/', recipesAPI)
 
 
-
-// app.use(express.static('public'));
 
 const PORT = 3000; 
 app.listen(PORT, () => {
