@@ -1,6 +1,31 @@
 const errors =require('./errors')
 const {faker} = require('@faker-js/faker');
+const axios = require ('axios')
 class recipesControl {
+    // async getGiphyGif(word){
+    //   const apiKey = "5eYX6PAcEMvuQsK7gx7dbLatUOHaSVQp"
+    //   const url = `http://api.giphy.com/v1/gifs/random?api_key=${apiKey}&tag=${word}&rating=g`
+
+    //   try {
+    //     const response = await axios.get(url)
+    //     return response.data.data.image_url
+    //   } catch(error){
+    //     console.error("Error fetching the GIF:", error)
+    //     return null
+    //   }
+    // }
+
+    // async replaceImgWithGif(recipes){
+    //   for (let i=0; i < recipes.length; i++){
+    //   const word = 'milk'
+    //   const gifUrl = await this.getGiphyGif(word)
+    //   if (gifUrl){
+    //     recipes[i].thumbnail = gifUrl
+    //   }
+    //   }
+    //   return recipes
+    // }
+
     checkvaledIngrediant(ingrediant){
         if (!ingrediant.match(/^[a-z]+$/i) ) {
             throw new errors.InvalidIngredientError()

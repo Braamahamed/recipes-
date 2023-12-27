@@ -16,6 +16,10 @@
         <label for="dairyFreeCheckbox">Dairy Free</label>
         <input type="checkbox" id="glutenFreeCheckbox">
         <label for="glutenFreeCheckbox">Gluten Free</label>
+        <div class="pagination">
+          <button id="prePage" onclick="nav_pre()"> Previous</button>
+          <button id="nextPage" onclick="nav_next()">Next</button>
+        </div>
         <div id="recipeList"></div> 
     
         <script id="recipe-template" type="text/x-handlebars-template">
@@ -31,6 +35,7 @@
               </ul>
               <p>chef : {{chef}}</p>
               <p>stars :{{rating}}</p>
+              <button class="share" data-title="{{Subject}}" data-video-link="https://www.youtube.com/">Email us</button>
             </div>
           {{/each}}
         </script>
